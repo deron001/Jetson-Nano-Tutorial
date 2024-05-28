@@ -1,0 +1,17 @@
+Jetson Nano 簡介
+	Introduction to Jetson Nano
+	Getting started with Jetson Nano
+	Installing system packages and prerequisites
+	Configuring your Python development environment
+	Installing Keras and TensorFlow on the Jetson Nano
+	Changing the default camera
+	Classification and object detection with the Jetson Nano
+
+相關應用網站：
+車流人流分析：https://www.youtube.com/watch?v=A3GrgSRPHnI
+自駕車、無人車: https://youtu.be/4B2ipB7n5Nk?t=142
+Developer Site https://www.youtube.com/watch?v=pckZFC_hs50
+Getting Started http://developer.nvidia.com/jetson
+Hello AI World http://nvidia.com/JetsonNano-Start
+http://github.com/dusty-nv
+
