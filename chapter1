@@ -1,17 +1,1264 @@
 Jetson Nano 簡介
-	Introduction to Jetson Nano
-	Getting started with Jetson Nano
-	Installing system packages and prerequisites
-	Configuring your Python development environment
-	Installing Keras and TensorFlow on the Jetson Nano
-	Changing the default camera
-	Classification and object detection with the Jetson Nano
+Outline
+•    Introduction to Jetson Nano
+•    Getting started with Jetson Nano
+•    Installing system packages and prerequisites
+•    Configuring your Python development environment
+•    Installing Keras and TensorFlow on the Jetson Nano
+•    Changing the default camera
+•    Classification and object detection with the Jetson Nano
+ 
+Introduction to Jetson Nano Jetson Nano (B01) 的優勢
+•    比樹莓派RPI 計算能力更強，體積相近
+•    ARM架構，資源種類多
+•    Ubuntu作業系統，視窗作業操作便利
+•    電力消耗約5W，全速運轉不到20W
+Jetson Nano Specifications 4GB B01
+Jetson Nano Specifications 2GB
+2GB vs. 4GB Comparison
+The Jetson Family
+The Jetson Family
+Open Framework Support
+NVIDIA TensorRT
+Jetson Software
+JETBOT、自駕車、無人車 套件
+Hello AI World
+Two Days To A Demo
+ 
+Jetson Nano 應用領域
+•    車流人流分析：https://www.youtube.com/watch?v=A3GrgSRPHnI
+ 
+•    自駕車、無人車https://youtu.be/4B2ipB7n5Nk?t=142
+ 
+https://www.youtube.com/watch?v=pckZFC_hs50
+ 
+Related Links
+•     Developer Site http://developer.nvidia.com/jetson
+•     Getting Started http://nvidia.com/JetsonNano-Start
+•     Hello AI World http://github.com/dusty-nv
+ 
+Included in the Box
+•    Jetson Nano Developer Kit box includes:
+•     Jetson Nano Developer Kit
+•     Small paper card with quick start and support information 
+•    You’ll also need:
+•     microSD card (16GB UHS-1 minimum => 64GB or 128GB )
+•     USB keyboard and mouse
+•     Computer display (either HDMI or DP)
+•     Micro-USB power supply (5V⎓2A) or 5V4A (with jumper)
+•     USB Wifi 
+•     Ethernet cable
+•     Webcam/RPI Camera
+•     May be HDMI-to-D-sub 
+ 
+Prepare for Setup
+•     microSD Card
+•     The Jetson Nano Developer Kit uses a microSD card as a boot device and for main storage. The minimum recommended is a 64GB /128GB UHS-1 card. (U3 better)
+ 
+•     Micro-USB Power Supply
+•     Power supply that can deliver 5V⎓2A at the developer kit’s Micro-USB port. 
+•     As an example of a good power supply, NVIDIA has validated Adafruit’s 5V 2.5A Switching Power Supply with 20AWG MicroUSB Cable (GEO151UB-6025). 
+•     5V4A power supply (in used)
+ 
+Optional Items
+•    Wireless Networking Adapter
+•     Jetson Nano Developer Kit includes a gigabit Ethernet port, but also supports many common USB wireless networking adapters, e.g., 
+•     Edimax EW-7811Un. 150MB  (poor)
+•     Edimax EW-7611ULB (with Bluetooth) (poor)
+•     TP-link Archer T2U Nano
+•     TP-Link  Archer T2U Plus
+•     Kootek AC 600
+•     Linksys WUSB6300
+•     intel 8265NGW 雙頻無線 WiFi 網卡 藍牙 4.2 AC8265
+•     ASUS/TPLINK wifi
+ 
+ 
+Starting Jetson Nano Write Image to the microSD Card
+•    To prepare your microSD card, you’ll need a computer with Internet connection and the ability to read and write SD cards, either via a built-in SD card slot or adapter.
+•    Download the Jetson Nano Developer Kit SD Card Image, and note where it was saved on the computer. 
+•     Form https://developer.nvidia.com/embedded/downloads
+•     JP 4.4 2020/04/21
+•     JP 4.5 2021/01/21
+•     JP 4.6 2021/08/04
+•     JP 4.6.1 2022/02/23, JP 4.6.4 (new)
+ 
+•    Instruction:  https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit
+ 
+Download Center 2023/11/07
+ 
+JetPack Archive
+Jpack 464
+•    https://developer.nvidia.com/jetpack-sdk-464
+ 
+ 
+Jetson Nano 安裝 image下載
+SD card Formatter 5.0.2 Write image to SD card
+•     While your Nano SD image is downloading, go ahead and download and install balenaEtcher, a disk image flashing tool:
+•     https://www.balena.io/etcher/
+ 
+fire up balenaEtcher and proceed to flash.
+ 
+Win32 Disk Imager的燒錄步驟
+•    下載並安裝Win32 Disk Imager。
+•    點選文件夾 -> 選擇先前下載好的映像檔檔案 ->選擇要燒錄到哪個裝置。
+•     點選從「映像檔」寫入資料到「裝置」中按鈕。
+•    彈出警告視窗請按「Yes」，
+•    開始燒錄。
+ 
+可能問題
+•    如果點擊“Flash“後一直無法燒錄，
+•     請到Windows Defender允許使用
+balenaEtcher ，
+•     或按右鍵以管理者權限執行
+•     您若不希望更改設定，也可以使用Win32DiskImager。
+Setup and First Boot
+•     Setup Steps
+•     Unfold the paper stand and place inside the developer kit box
+•     Set the developer kit on top of the paper stand.
+•     Insert the microSD card (with system image already written to it) into the slot on the underside of the Jetson Nano module.
+•     Power on your computer display and connect it.
+•     Connect the USB keyboard and mouse.
+•     Connect your Micro-USB power supply (5V⎓2A ) or (DC 5V4A Jumper). The Jetson Nano Developer Kit will power on and boot automatically.
+Jetson Nano 使用教學
+•     AC power
+•     將Jetson Nano 裝上已燒錄好的SD卡並接上螢幕、電、滑鼠、  鍵盤及電源(如果是使用power jack的話，則 J48需要插上 jumper)
+First Boot
+•    A green LED next to the Micro-USB connector will light as soon as the developer kit powers on. 
+•    Wait… about 5 seconds
+•    When you boot the first time, the Jetson Nano Developer Kit will take you through some initial setup, including:
+•     Review and accept NVIDIA Jetson software EULA
+•     Select system language, keyboard layout, and time zone
+•     Create username, password, and computer name
+•     Log in    
+•     Most used username/password: jetbot/jetbot
+開機設定
+ 
+基本操作介紹
+After Logging In
+•    You will see this screen. Congratulations!
+ 
+Jetpack 4.2/Jetpack 4.6.3 
+初始設定與更新
+•    先開啟 terminal 並依序執行以下指令:
+•    #更新我們的軟體包清單
+•    $ sudo apt update
+•    #對已安裝的軟體包進行升級
+•    $ sudo apt-get upgrade
+•    $ sudo apt install -y python3-pip #(安裝pip)
+•    $ pip3 install --upgrade pip (更新pip)
+ 
+ 
+編輯器使用 
+vim, nano
+Vim 編輯器使用
+•    https://blog.techbridge.cc/2020/04/06/how-to-use-vim-as-an-editor-tutorial/
+•    $ sudo apt-get update
+•    $ sudo apt-get install vim #安裝vim
+ 
+•    # 透過 vim 新增/編輯 demo.txt 這個檔案 
+•    $ vim demo.txt
+•    在 vim 有四種模式：
+•     命令模式（Command mode）ESC
+•     插入模式（Insert mode）i
+•     底線命令模式（Last line mode） : 
+•     視覺模式（Visual mode）v
+•    當使用者處在不同模式的時候，鍵盤輸入會產生不同的作用。
+•    x：刪除游標所在字元
+vim 常用其他指令
+Enter：換行
+Back Space：刪除游標前一個字元
+Del：刪除游標後一個字元
+方向鍵：在文檔中移動游標
+Page Up/Page Down：上/下翻頁
+ 
+底線命令模式 常用指令：
+:q：不儲存直接離開
+:q!：不儲存，強制直接離開（當有修改不想儲存時）
+:e!：放棄所有修改，從上次儲存文件紀錄開始編輯
+:w：儲存文檔但不離開
+:!w：強制儲存文檔但不離開
+:w {name}：儲存文檔並命名為 name，但不離開
+:wq：儲存並離開
+:!wq：強制儲存並離開
+Nano 編輯器
+•     開啟終端機後先用下列指令更新套件清單 :
+•     $ sudo apt-get update
+•     然後輸入下列指令安裝 nano :
+•     $ sudo apt-get install nano
+•     完成後即可使用 nano 指令來編輯檔案, 例如 :
+•     $ nano test.txt    (開啟舊檔)
+ 
+nano 編輯器基本操作快捷鍵 
+•    CTRL + O : 存檔
+•    CTRL + X : 跳出 nano
+•    CTRL + C : 取消
+•    CTRL + W : 搜尋
+•    CTRL + R : 取代
+•    ALT + W : 繼續搜尋
+•    ALT + A : 設定 mark 起點
+•    ALT + 6 : 複製選取區段至剪貼簿
+•    CTRL + U : 貼上
+•    CTRL + K : 剪下選取區段
+•    CTRL + _ : 前往指定列
+ 
+模式切換
+•     $ sudo jetson_clocks
+ 
+•     $ sudo nvpmodel ¡Vq
+ 
 
-相關應用網站：
-車流人流分析：https://www.youtube.com/watch?v=A3GrgSRPHnI
-自駕車、無人車: https://youtu.be/4B2ipB7n5Nk?t=142
-Developer Site https://www.youtube.com/watch?v=pckZFC_hs50
-Getting Started http://developer.nvidia.com/jetson
-Hello AI World http://nvidia.com/JetsonNano-Start
-http://github.com/dusty-nv
+$ sudo nvpmodel -m 0
+ 
+•     $ sudo nvpmodel -m 1 
+介紹如何增加 swap空間
+•     顯示swap 設定 $ sudo swapon -show
+•     查看目前剩餘的記憶體用量 $ free –h
+•     檢查硬碟剩餘空間 $ df -h
+•     生成swapfile文件 $ sudo fallocate -l 8G /swapfile 
+•     #理想的SWAP size應是RAM的二倍
+•     $ sudo chmod 600 /swapfile  #只給 root 讀 
+•     $ ls –lh /swapfile #檢查設定
+•     $ sudo mkswap /swapfile  #初始化為 swap
+•     $ sudo swapon /swapfile  #掛載起來試試
+ 
+•    # 最後我們看一下這個檔是否添加成功          
+•     $ sudo swapon –s #或--show
+•    設置為自動啟用swapfile
+•     $ sudo bash -c 'echo "/swapfile none swap defaults 0 0" >> /etc/fstab‘
+•    或修改 $ sudo vim /etc/fstab
+•     增加 /swapfile   none swap  defaults 0 0
+SWAP file設定(參考)
+•     GitHub - JetsonHacksNano/installSwapfile: Install a swap file on the NVIDIA Jetson Nano Developer Kit. This should help with memory pressure issues.
+•     調整 SWAP 空間，在這裡預設為 6 GB 的記憶體
+•     $ git clone https://github.com/JetsonHacksNano/installSwapfile
+•     $ ./installSwapfile/installSwapfile.sh
+ 
+•     重開機
+•     $ sudo reboot
+散熱風扇 使用教學 安裝
+•    開發套件提供5V電壓所以是使用5V的風扇
+•    JIESAMMY 4020 4線PWM雙滾珠散熱風扇
+•    安裝位置 J15 
+風扇控制
+•    $ sudo jetson_clocks
+ 
+•    ON :使風扇用PWM速度255來運作
+•     $ sudo sh -c 'echo 255 > /sys/devices/pwm-fan/target_pwm' 
+•     $ sudo sh -c 'echo 127 > /sys/devices/pwm-fan/target_pwm' 
+•     $ sudo sh -c 'echo 63 > /sys/devices/pwm-fan/target_pwm'
+ 
+•    OFF :
+•     $ sudo sh -c 'echo 0 > /sys/devices/pwm-fan/target_pwm’ 
+ 
+•    可是下次開機時風扇不會自行啟動，
+開機後自動啟動風扇
+•     移動到/etc目錄，
+•     創建rc.local檔案(如果已經有的就不用)，再給rc.local可執行的權限，最後編輯rc.local文件
+•     $ cd /etc
+•     $ sudo vim rc.local
+•     輸入
+•      #!/bin/bash 
+•      sleep 10 
+•      sudo /usr/bin/jetson_clocks 
+•      sudo sh -c 'echo 255 > /sys/devices/pwm-fan/target_pwm‘
+•     存檔
+•     $ sudo chmod u+x rc.local #給rc.local可執行的權限
+Install automatic FAN driver
+•    How To Install The Fan Driver:
+•     $ sudo apt update
+•     $ sudo apt install -y python3-dev
+•     $ git clone https://github.com/jetsonworld/jetson-fan-ctl.git
+•     $ cd jetson-fan-ctl/
+•     $ sudo sh install.sh
+ 
+•     - Adjust the fan speed: $ sudo vim /etc/automagic-fan/config.json
+ 
+•     - Check the fan status: $　sudo service automagic-fan status
+網路設定與遠端連線 Wifi 網路卡設定
+•     USB wifi card setting 
+•     disable power saving mode to the WiFi card: 關閉省電模式
+•     $ sudo iw dev wlan0 set power_save off
+•     Get ip address:
+•     $ ifconfig wlan0
+ 
+•    取得ip address
+•    $ ip addr show
+ 
+•    在終端使用ifconfig命令獲取由路由器DHCP分配的IP地址，並在路由器中綁定IP與MAC位址，之後可通過固定IP來連線
+ 
+ifconfig 畫面範例
+Wifi setting by command
+•     list all possible network connections : $ nmcli d [Enter]
+•     WiFi module is turned on : $ nmcli r wifi on [Enter]
+•     Now we can scan and list off all visible WiFi networks available to us by typing the following command: $ nmcli d wifi list [Enter]
+•     $ nmcli d wifi connect [SSID] password [PASSWORD] [Enter]
+•    You should get a list of possible networks available to you including current status in terms of signal strength, data rate, channel, security, etc.
+ 
+ 
+ 
+ 
+ 
+•    SSID 
+SSH 連線設定
+Using SSH
+•     使用PUTTY 通過SSH協議連接板子
+•     https://www.digikey.com/en/maker/projects/getting-started-with-the-nvidia-jetson-nano-part-1-setup/2f497bb88c6f4688b9774a81b80b8ec2
+•     讓Jetson Nano和電腦連上同一個Wi-Fi熱點(同一網段)，點選Jetson Nano桌面左上角的「Search your computer」，輸入「Terminal」，打開終端機。
+•     查詢ip: $ ifconfig
+•     wlan0內的inet後面即是我們要查詢的IP位置，
+•     可以知道這台Jetson Nano的IP是192.168.12.147。
+•     常使用的遠端連線軟體為PuTTY，也可以使用MobaXterm，請點入連結官網進行下載及安裝。
+ 
+ 
+SSH 連線設定
+•     By default, the Jetson Nano should be running an SSH server.
+•     直接連線。
+ 
+•     Linux 桌機之 Ubuntu 沒有預載 SSH 伺服器, 為了能用筆電或其他電腦透過 SSH 遠端連線 Jetson Nano 主機, 實現無頭存取 (headless access), 可用下列指令安裝 OpenSSH 伺服器 :
+•    $ sudo apt-get install -y openssh-server  
+ 
+•     Using SSHFS (option)
+•      Graphical interface to copy files between your host computer and the Nano,
+•      Download and install the latest release of winfsp from this site: https://github.com/billziss-gh/winfsp/releases
+•      Download and install the latest release of SSHFS-Win from this site: https://github.com/billziss-gh/sshfs-win/releases (you will likely need to reboot after this step)
+•      Open a file explorer window, right-click on This PC, and select Add a Network Location. Enter the following, replacing <username> with the username on your Nano and <IP address> with the IP address (or hostname) of the Nano: \\sshfs\<username>@<IP address>
+使用PuTTY進行連線
+•     Step 1 開啟PuTTY軟體 (windows環境，需要先安裝)。 https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
+•     Step 2 輸入Jetson Nano的IP位置，點擊「Open」按鈕。
+•     Step 3 依序輸入帳號及密碼，顯示以下終端畫面則代表連線成功。
+SSH 無法連線問題
+•     但是如果遇到“Access Denied”的問題，則可能原因：
+•     
+      1、帳戶密碼錯誤。
+•     
+      2、Jetson nano的SSH服務沒有開啟
+•     進入Jetson Nano的圖形化介面，打開終端機(terminal)，
+•     更改sshd_config文件，重啟SSH服務
+•     $ sudo vim /etc/ssh/sshd_config
+•     輸入用戶名和密碼，找“# Authentication”這一部分，
+•     更改其中 #PermitRootLogin prohibit-password”這一項。
+•     加上一行：PermitRootLogin yes
+ 
+3.重啟SSH服務：
+•     $ /etc/init.d/ssh restart
+使用MobaXterm連線 (建議)
+•     Step 1 輸入Jetson Nano的IP。
+•     Step 2 接著輸入帳號及密碼，連線完成會出現以下畫面。
+•     MobaXterm左方有圖形化介面可以直觀的使用，這樣不需要另外準備隨身碟存取檔案，只要開啟資料夾並點選檔案就能開啟或下載囉！
+MobaXterm 設定
+•    在本地端打開 MobaXterm 使用SSH連線，另外可以在Settings → Configuration 裡設定自己常用的編輯器，ex. Sublime Text 3
+ 
+Remote Desktop Protocol (RDP) 
+•    Finally, install the Remote Desktop Protocol (RDP) server. I know that RDP is a proprietary protocol by Microsoft, but it seems to work better than VNC on the Nano.
+•     $ sudo apt update
+•     $ sudo apt install -y xrdp
+•     $ sudo reboot
+•    Log in via RDP (windows)
+•     On Windows, start the Remote Desktop application (遠端桌面連線). 
+•     Enter your username and IP address of the Nano. 
+•     In the Display tab, change the resolution to 1280x1024 and change the Color depth to 16-bit. These will help the RDP session run more smoothly.
+•     In the Experience tab, change the Performance setting to Modem (56 kbps) and de-select the Persistent bitmap caching option. Supposedly, these help optimize the RDP connection for speed over nice visuals.
+ 
+Alias Python 3 (for new user)
+•     The Jetson Nano image comes installed with Python 2 and Python 3. 
+•     That is, typing 
+•     python->python 2, 
+•     python3->python 3 
+•     If you’re like me and trying to move all your work to Python 3, I recommend setting an alias in your .bashrc file:
+•     $ vim ~/.bashrc
+•     Add line alias python=python3
+•     $ source ~/.bashrc
+Camera / WebCam
+關閉圖形界面-用於跑車子時
+•    Memory 占用 1.5G 
+•    可以考慮關閉X-Windows(約 1.1G)
+•     $ sudo systemctl set-default multi-user.target 
+•     $ sudo reboot 
+•     # 結果： Removed /etc/systemd/system/default.target. Created symlink /etc/systemd/system/default.target → /lib/systemd/system/multi-user.target. 
+ 
+•    啟用圖形用戶界面
+•     $ sudo systemctl set-default graphical.target 
+•     $ sudo reboot
+•     Ref. https://www.itdaan.com/tw/280a56cb23d430384cf58f1a8095950b
+羅技 C270 webcam 安裝
+•    點選畫面左上角Search，搜尋「webcam」，點選「Cheese Webcam Booth」開啟。
+Pi camera V2 安裝
+on Nano B01 board
+Test camera
+•    $ gst-launch-1.0 nvarguscamerasrc sensor_id=0 ! nvoverlaysink
+•    and:
+•    $ gst-launch-1.0 nvarguscamerasrc sensor_id=1 ! Nvoverlaysink
+ 
+•    Related Link
+•     https://github.com/JetsonHacksNano/CSI-Camera
+Camera test
+•    $ gst-launch-1.0 nvarguscamerasrc ! ‘video/x-raw(memory:NVMM),width=3820, height=2464, framerate=21/1, format=NV12’ ! nvvidconv flip-method=0 ! ‘video/x-raw, width=960, height=616' ! nvvidconv ! nvegltransform ! nveglglessink -e
+免費線上課程與資源
+•    NVIDIA®Jetson Nano™ 8小時線上課程，完成可拿證書喔！
+•    註冊網址
+•     https://courses.nvidia.com/courses/course-v1:DLI+C-RX-02+V1/about
+•    Read the Jetson Nano Developer Kit User Guide, which includes:
+•     Many more details about the developer kit hardware.
+•     Explanations of all the components of NVIDIA JetPack, including developer tools with support for cross-compilation.
+•     Lists of all included samples and sample documentation.
+•    Head to the NVIDIA Jetson Developer Zone for access to all Jetson platform information.
+•    Ask questions or share a project on the NVIDIA Jetson Forums.
+ 
+Jetson Nano Projects and Learning
+•    The Jetson Nano Developer Kit is an AI computer for learning and for making.
+•    Check out the Jetson Projects Page for resources including:
+•     Hello AI World
+•     Get started with deep learning inference for computer vision using pretrained models for image classification and object detection.
+•     Realtime acceleration with TensorRT and live camera streaming.
+•     Code your own recognition program in C++.
+•     For those interested in training their own networks, take the full Two Days to a Demo which includes both training and inference.
+ 
+Jetson Nano 相關影像檔
+•    Jetson Nano 
+•     Jetson Nano A02 Jetpack 4.2  
+•     https://developer.nvidia.com/embedded/dlc/jetson-nano-dev-kit-sd-card-image
+•     Jetson Nano A02/B01 Jetpack 4.4
+•     https://developer.nvidia.com/jetson-nano-sd-card-image
+•    JetBot
+•      Jetson Nano A02 Jetpack 4.2  
+•     https://drive.google.com/file/d/1RgQ99QOqhcNxivSNJpetXdoOCqUWAWH_/view
+•     Jetson Nano A02/B01 Jetpack 4.3
+•     https://drive.google.com/file/d/1G5nw0o3Q6E08xZM99ZfzQAe7-qAXxzHN/view
+ 
+資料來源&相關連結：
+•     Jetson Nano官方頁面：https://www.nvidia.com/zh-tw/autonomous-machines/embedded-systems/jetson-nano/
+•     Jetson Nano wiki：https://elinux.org/Jetson_Nano
+•     Jetson 論壇：https://devtalk.nvidia.com/default/board/139/embedded-systems/1
+•     Raspberry Pi攝影機測試：https://github.com/JetsonHacksNano/CSI-Camera
+•     Cave Education https://www.rs-online.com/designspark/content-types/article/15827?lang=cn
+•     教學 https://jkjung-avt.github.io/jetpack-4.6/
+ 
+ 
+軟體安裝
+軟體更新
+•    鎖住功率使其不過載
+•     $ sudo jetson_clocks
+•     更新軟體源倉庫列表命令： 
+•     $ sudo apt update
+•    更新應用檔案系統命令： 
+•     $ sudo apt upgrade
+ 
+•    設定系統參數 抓取cuda lib (系統已經裝好)
+•     $ sudo vim ~/.bashrc
+•     加入指令
+•     export CUDA_HOME=/usr/local/cuda-10.2
+•     export LD_LIBRARY_PATH=/usr/local/cuda-10.2/lib64:$LD_LIBRARY_PATH
+•     export PATH=/usr/local/cuda-10.2/bin:$PATH
+•     啟動
+•     $ source ~/.bashrc
+•     檢查 
+•     $ nvcc -V
+ 
+Install system-level dependencies
+•    Install system-level dependencies
+•     $ sudo apt-get install git cmake
+•     $ sudo apt-get install libatlas-base-dev gfortran
+•     $ sudo apt-get install libhdf5-serial-dev hdf5-tools
+•     $ sudo apt-get install python3-dev
+•     $ sudo apt-get install nano locate
+•    install SciPy prerequisites
+•     $ sudo apt-get install libfreetype6-dev python3-setuptools
+•     $ sudo apt-get install protobuf-compiler libprotobuf-dev openssl
+•     $ sudo apt-get install libssl-dev libcurl4-openssl-dev
+•     $ sudo apt-get install cython3
+•    Few XML tools for working with TensorFlow Object Detection (TFOD) API projects:
+•     $ sudo apt-get install libxml2-dev libxslt1-dev
+ 
+Update Cmake 
+•     First, download and extract the Cmake update:
+•     Newest version https://cmake.org/download/cmake-3.28.0.tar.gz (2020/09/18) 3.26 (2023/03/07) 3.28 (2023/10/18)
+•     $ wget http://www.cmake.org/files/v3.28.0/cmake-3.28.0.tar.gz
+•     $ tar xpvf cmake-3.28.0.tar.gz cmake-3.28.0/
+•     Next, compile CMake:
+•     $ cd cmake-3.28.0/
+•     $ sudo ./bootstrap --system-curl //20 minutes
+•     $ sudo make -j4
+•     $ sudo make install
+•     update your bash profile:
+•     $ echo 'export PATH=/home/test/cmake-3.28.0/bin/:$PATH' >> ~/.bashrc
+•     $ source ~/.bashrc
+•     $ cmake --version //return the version of cmake
+•     Ensure that you do not delete the cmake-3.28.0/ directory in your home folder.
+•     Ref. https://forums.developer.nvidia.com/t/can-t-install-cmake/75299/2
+ 
+Install Tensorflow-gpu on Jetson-Nano
+Tensorflow vs. JerPack version
+ 
+Compatibility TF and JP
+installing  tensorflow for JP46
+•    Install system packages required by TensorFlow:
+ 
 
+Install Details
+•    As of the 20.02 release, the TensorFlow package has been renamed from tensorflow-gpu to tensorflow. 
+•    In order to properly upgrade your version of TensorFlow, you may need to uninstall the tensorflow-gpu package before installing tensorflow, as having both installed simultaneously will lead to undefined behavior.
+•    TensorFlow 2.0 is now available for installation. 
+•    Note that TensorFlow 2.x is not fully compatible with TensorFlow 1.x releases, therefore, code written for the older framework may not work with the newer package.
+ 
+•    Bug fixes and improvements for TF-TRT. For more information, see the TensorFlow-TensorRT (TF-TRT) User Guide and the TensorFlow Container Release Notes.
+JP46 / JP 461
+Index of /compute/redist/jp/v44/tensorflow
+Tensorflow Package Jpack v43
+•    https://developer.download.nvidia.com/compute/redist/jp/v43/tensorflow-gpu/
+ 
+Tensorflow Package Jpack v42 
+•     https://developer.download.nvidia.com/compute/redist/jp/v42/tensorflow-gpu/
+ 
+Verifying The Installation
+•     To verify that TensorFlow has been successfully installed on Jetson AGX Xavier, you’ll need to launch a Python prompt and import TensorFlow. 
+•     From the terminal, run:
+•     $ python3
+•     >>> import tensorflow
+•     If TensorFlow was installed correctly, this command should execute without error. 
+Tensorflow Test example
+$ TF_CPP_MIN_LOG_LEVEL=3 
+$ python3 -c "import tensorflow as tf; tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR); 
+print('tensorflow version: %s' % tf.__version__); print('tensorflow.test.is_built_with_cuda(): %s' % tf.test.is_built_with_cuda()); print('tensorflow.test.is_gpu_available(): %s' % tf.test.is_gpu_available(cuda_only=False, min_cuda_compute_capability=None))“
+ 
+輸出
+tensorflow version: 2.6.2 tensorflow.test.is_built_with_cuda(): True tensorflow.test.is_gpu_available(): True 
+Installing Keras on the NVIDIA Jetson Nano
+•     Installing Keras 
+•     $ pip3 install scipy 
+•     $ pip3 install keras
+•     These installs took ~35 minutes.
+•     If error please reference page
+•     https://www.pyimagesearch.com/2020/03/25/how-to-configure-your-nvidia-jetson-nano-for-computer-vision-and-deep-learning/
+ 
+ 
+Testing TensorFlow and Keras
+•     $ python3
+•     >>> import tensorflow as tf
+•     >>> import keras
+•     >>> print(tf.__version__)
+•     1.14.0
+•     >>> print(keras.__version__)
+•     2.3.1
+•     >>> print(tf.test.is_gpu_available())
+JK Jung’s Blog
+•     JetPack-4.6 安裝說明
+•     https://jkjung-avt.github.io/jetpack-4.6/
+•     設定CUDA 環境
+ 
+ 
+安裝OpenCV-4.1.1環境
+### Install packages required for building code 
+$ sudo apt update 
+$ sudo apt install -y build-essential make cmake \ 
+      cmake-curses-gui git g++ pkg-config curl libfreetype6-dev 
+ 
+### Install dependencies for python3 "cv2" 
+$ sudo apt install -y libcanberra-gtk-module \
+     libcanberra-gtk3-module protobuf-compiler libprotoc-dev \   
+     python3-dev python3-pip 
+$ sudo pip3 install-U pip Cython testresources setuptools 
+$ sudo pip3 install protobuf numpy==1.19.4 matplotlib==3.2.2 
+tensorflow 2 安裝
+$ sudo apt install -y libhdf5-serial-dev hdf5-tools \  
+      libhdf5-dev zlib1g-dev zip libjpeg8-dev  \
+      liblapack-dev libblas-dev gfortran 
+$ sudo pip3 install -U --no-deps numpy==1.19.4 \
+     future==0.18.2 mock==3.0.5  \
+     keras_preprocessing==1.1.2 keras_applications==1.0.8 \ 
+     gast==0.4.0 protobuf pybind11 cython pkgconfig 
+$ sudo env H5PY_SETUP_REQUIRES=0 pip3 install -U h5py==3.1.0 
+$ sudo pip3 install --pre --extra-index-url \ https://developer.download.nvidia.com/compute/redist/jp/v46 \ tensorflow>=2 
+TensorRT
+Lastest  Version
+ 
+ 
+導論
+•     TensorRT是一個高性能的深度學習推理（Inference）優化器，可以為深度學習應用提供低延遲、高吞吐率的部署推理。
+•     TensorRT可用於對超大規模數據中心、嵌入式平台或自動駕駛平台進行推理加速。
+•     TensorRT現已能支持TensorFlow、Caffe、Mxnet、Pytorch等幾乎所有的深度學習框架，將TensorRT和NVIDIA的GPU結合起來，能在幾乎所有的框架中進行快速和高效的部署推理。
+•     TensorRT 是一個C++函數庫，從 TensorRT 3 開始提供C++ API和Python API，主要用來針對 NVIDIA GPU進行 高性能推理（Inference）加速。
+•     現在最新版TensorRT是8.6.1 版本(2024)。
+•     與JetPack 461搭配的版本為8.2.1 
+•     Download link: 
+•     https://developer.nvidia.com/nvidia-tensorrt-download (需註冊)
+•     https://github.com/NVIDIA/TensorRT
+•     https://developer.nvidia.com/tensorrt-getting-started
+ 
+ 
+Nvidia Deep Learning Software Platform 
+NVIDIA TensorRT 
+•     High performance neural network inference engine for production deployment 
+•     Generate optimized and deployment-ready models for datacenter, embedded and automotive platforms 
+•     Deliver high-performance, low-latency inference demanded by real-time services 
+•     Deploy faster, more responsive and memory efficient deep learning applications with INT8 and FP16 optimized precision support 
+TensorRT  INT8 Workflow 
+TensorRT Layers 
+•    Layers Types Supported 2017
+•     Convolution: Currently only 2D convolutions 
+•     Activation: ReLU, tanh and sigmoid 
+•     Pooling: max and average 
+•     Scale: similar to Caffe Power layer (shift+scale*x)^p 
+•     ElementWise: sum, product or max of two tensors 
+•     LRN: cross-channel only 
+•     Fully-connected: with or without bias 
+•     SoftMax: cross-channel only 
+•     Deconvolution 
+ 
+TensorRT Layers 
+•    Activation: ReLU, tanh and sigmoid
+•    Concatenation : Link together multiple tensors across the channel dimension. 
+•    Convolution: 3D，2D
+•    Deconvolution
+•    Fully-connected: with or without bias
+•    ElementWise: sum, product or max of two tensors
+•    Pooling: max and average
+•    Padding
+•    Flatten 
+ 
+ Testing TensorRT GoogLeNet and MTCNN
+### Clone the tensorrt_demos code 
+$ cd ${HOME}/project 
+$ git clone https://github.com/jkjung-avt/tensorrt_demos.git 
+ 
+### 
+### Build TensorRT engine for GoogLeNet 
+$ cd ${HOME}/project/tensorrt_demos/googlenet 
+$ make 
+$ ./create_engine 
+ 
+### 
+### Build TensorRT engines for MTCNN 
+$ cd ${HOME}/project/tensorrt_demos/mtcnn 
+$ make 
+$ ./create_engines 
+ 
+### 
+### Build the "pytrt" Cython module 
+$ cd ${HOME}/project/tensorrt_demos 
+$ sudo pip3 Cython 
+$ make 
+Testing TensorRT YOLOv3 and YOLOv4 models
+### Install dependencies and build "yolov3-416" and "yolov4-# 416" TensorRT engines 
+ 
+$ sudo pip3 install onnx==1.9.0 
+$ cd {HOME}/project/tensorrt_demos/plugins 
+$ make 
+$ cd ${HOME}/project/tensorrt_demos/yolo 
+$ ./install_pycuda.sh 
+$ ./download_yolo.sh //下載yolo weight, cfg 模型
+$ python3 yolo_to_onnx.py -m yolov3-416 
+$ python3 onnx_to_tensorrt.py -v -m yolov3-416 
+$ python3 yolo_to_onnx.py -m yolov4-416 
+$ python3 onnx_to_tensorrt.py -v -m yolov4-416 
+ yolo_to_onnx.py 的參數解說
+onnx_to_tensorrt.py 的參數解說
+ Testing TensorRT MODNet
+### Build TensorRT engine for MODNet 
+$ cd ${HOME}/project/tensorrt_demos/modnet 
+$ python3 onnx_to_tensorrt.py modnet.onnx modnet.engine 
+ 
+ 
+I tested the TensorRT engine with the “image.jpg” image.
+ 
+ 
+$ cd ${HOME}/project/tensorrt_demos 
+$ python3 trt_modnet.py --image modnet/image.jpg --demo_mode
+Python virtual environment
+Python virtual environment
+•     Keep our Python development environments independent and separate from each other.
+•     To manage our Python virtual environments we’ll be using virtualenv and virtualenvwrapper
+ 
+Python virtual environments
+•     安裝軟體
+•     $ sudo pip install virtualenv virtualenvwrapper
+•     設定虛擬環境啟動時機啟動
+•     update our ~/.bashrc file
+•     $ vim ~/.bashrc  #or nano ~/.bashrc
+•     Add lines
+•     # virtualenv and virtualenvwrapper
+•     export WORKON_HOME=$HOME/.virtualenvs
+•     export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+•     source /usr/local/bin/virtualenvwrapper.sh
+•     Save file and activate
+•     $ source ~/.bashrc
+ 
+ 
+Create a Python virtual environment
+•      Create a Python virtual environment using the mkvirtualenv command, virtual environment name DL
+•      $ mkvirtualenv DL -p python3
+•      常見的virtualenvwrapper命令
+•      建立虛擬環境
+•      $ mkvirtualenv DL
+•      切換到某個虛擬環境
+•      $ workon DL
+•      退出當前虛擬環境
+•      $ deactivate
+•      刪除某個虛擬環境
+•      $ rmvirtualenv DL
+•      列出所有虛擬環境
+•      $ lsvirtualenv
+•      進入到虛擬環境所在的目錄
+•      $ cdvirtualenv
+Installing Multiple TensorFlow Versions
+•    If you want to have multiple versions of TensorFlow available at the same time, this can be accomplished using virtual environments. 
+•    First, install the virtualenv package and create a new Python 3 virtual environment: 
+•     $ sudo apt-get install virtualenv
+•     $ python3 -m virtualenv -p python3 <chosen_venv_name>
+•    Activate the Virtual Environment Next, activate the virtual environment: 
+•     $ source <chosen_venv_name>/bin/activate
+•    Install the desired version of TensorFlow and its dependencies: 
+•     $ pip3 install -U numpy grpcio absl-py py-cpuinfo psutil portpicker six mock requests gast h5py astor termcolor protobuf keras-applications keras-preprocessing wrapt google-pasta setuptools testresources
+•     $ pip3 install --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v44 tensorflow==$TF_VERSION+nv$NV_VERSION
+•    Deactivate the Virtual Environment
+•    Finally, deactivate the virtual environment:
+•     $ deactivate
+jtop
+Jtop 
+•     $ sudo apt-get install python-pip python-dev build-essential 
+•     $ sudo pip3 install --upgrade pip
+•     $ sudo -H pip3 install jetson-stats
+•     $ sudo systemctl restart jetson_stats.service
+•     $ sudo jtop
+•     需要reboot
+ jtop –h for help
+•    usage: jtop [-h] [--no-warnings] [--restore] [--loop] [-r REFRESH] [-p PAGE][-v]
+•    jtop is system monitoring utility and runs on terminal
+•    optional arguments:
+•       -h, --help            show this help message and exit
+•       --no-warnings         Do not show warnings (default: False)
+•       --restore             Reset Jetson configuration (default: False)
+•       --loop                Automatically switch page every 5s (default: False)
+•       -r REFRESH, --refresh REFRESH
+•                             refresh interval (default: 500)
+•       -p PAGE, --page PAGE  Open fix page (default: 1)
+•       -v, --version         show program's version number and exit
+Jtop control
+•    In page 3 MEM:
+•     c Clear cache
+•     s Enable/Disable extra swap
+•     + and - Increase and decrease swap size
+ 
+•    In page 4 CTRL:
+•     a Start/Stop jetson_clocks service (Note: jetson_clocks start only after 60s from up time)
+•     e Enable/Disable jetson_clocks on board boot
+•     + and - Increase and decrease the NVPmodel
+•     f Manual/jetson_clocks mode for your fan
+•     p and m Increase and decrease the Fan speed
+operations
+•     The jetson_clocks script disables the DVFS governor and locks the clocks to their maximums as defined by the active nvpmodel power mode. 
+•     So if your active mode is 10W, jetson_clocks will lock the clocks to their maximums for 10W mode. 
+•     And if your active mode is 5W, jetson_clocks will lock the clocks to their maximums for 5W mode
+•     $ sudo jetson_clocks
+•     $ sudo jetson_clocks –show
+ 
+•     Using Tegrastats
+•     tegrastats
+•     tegrastats --interval 5000
+ 
+ 
+ 
+切換高低功率
+•     maximum power capacity: (1) 5W is mode 1 and (2) 10W is mode 0. 
+•     # 鎖住功率使其不過載
+$ sudo jetson_clocks 
+•     # 知道目前是哪一個 mode
+$ sudo nvpmodel –q
+•     # 將目前的瓦數 降為5瓦
+$ sudo nvpmodel –m 1
+•     # 將目前的瓦數 改為 max 瓦，max 最大為(10w) 此功率需用 DC 5V 4A 供電，不然會突然關機
+$ sudo nvpmodel –m 0
+•     ＃Help:
+•     $ nvpmodel -h
+ 
+ 
+Info / Jetpack 4.2
+JetPack 4.4 
+jtop
+•    $ pip3 install -U jetson-stats
+•    $ jtop 
+jetson_config
+•    Check jetson-stats health, enable/disable desktop, enable/disable jetson_clocks, improve the performance of your wifi are available only in one click using jetson_config
+•    jetson_release –v
+•    jetson_swap
+ 
+Jetson_release
+jetson_swap
+jetson variables
+Jetson-inference
+Compiling and installing Jetson Inference on the Nano
+•    Provided with the repo is a library of TensorRT-accelerated deep learning networks for image recognition, object detection with localization (i.e. bounding boxes), and semantic segmentation. 
+•    This inferencing library (libjetson-inference) is intended to be built & run on the Jetson, and includes support for both C++ and Python.
+•    Various pre-trained DNN models are automatically downloaded to get you up and running quickly. 
+•    It's also setup to accept customized models that you may have trained yourself, including support for Caffe, TensorFlow UFF, and ONNX.
+•    Full instruction https://github.com/dusty-nv/jetson-inference/blob/master/docs/building-repo-2.md
+ 
+Install jetson-inference 兩種方式
+•     $sudo apt install -y git cmake libpython3-dev python3-numpy 
+•     $ git clone --recursive https://github.com/dusty-nv/jetson-inference
+•     $ cd jetson-inference
+•     $ docker/run.sh
+•     $ docker/build.sh
+•     =======================================
+•     $ git clone --recursive https://github.com/dusty-nv/jetson-inference
+•     $ cd jetson-inference
+•     $ git submodule update --init
+•     $ mkdir build
+•     $ cd build
+•     $ cmake ../ 
+•     $ make
+•     $ sudo make install
+•     $ sudo ldconfig
+ 
+ 
+Install jetson-inference
+•     The cmake command will ask for root permissions.
+•     During the configure process, cmake will also download a few gigabytes of pre-trained sample models. Make sure you have a few GB to spare on your micro-SD card! (This is also why I recommend a 128GB (at least 64GB) microSD card instead of a 16GB card).
+ 
+Downloading Models
+cd getson-inference/tools
+./download-models.sh
+Installing PyTorch
+Overview
+•     Classifying Images from Command Line
+•     Coding Your Own Recognition Program
+•     Real time Recognition from Live Camera
+•     Detecting Objects in Images from Disk
+•     Object Detection from Live Camera
+ 
+ 
+Jetson-Inference Examples
+Directory of jetson-inference
+imagenet-camera  Examples
+•    change to the directory ~/jetson-inference/build/aarch64/bin/  and execute the imagenet-camera binary:
+•     $ cd ~/jetson-inference/build/aarch64/bin/ #注意路徑
+•     $ ./imagenet-camera --camera=/dev/video0 
+•     # using GoogleNet, V4L2 camera /dev/video0 (1280x720) USB webcam
+ 
+•     $ ./imagenet-camera --width=640 --height=480 
+ 
+•     # using GoogleNet, default MIPI CSI camera (640x480)
+•     $ ./imagenet-camera # using GoogleNet, default MIPI CSI camera (1280x720) 
+ 
+•     # using ResNet-18, default MIPI CSI camera (1280x720)
+•     $ ./imagenet-camera --network=resnet-18
+ 
+•    If this is the first time you are loading a particular model then it could take 5-15 minutes to load the model.
+imagenet-camera 
+•     呼叫攝影鏡頭做物件偵測程式時
+•     指令：$ ./imagenet-camera --network facenet --camera /dev/video0
+Example
+•    With the model trained, we can use it to make classification predictions! Run the following program (changing /dev/video0 for your particular camera):
+•     $ ./imagenet-camera --model=utensils/resnet18.onnx --labels=/home/sgmustadio/datasets/utensils/
+labels.txt --camera=/dev/video0 --width=640 --height=480 --input_blob=input_0 --output_blob=output_0
+•    Further information
+•     https://github.com/dusty-nv/jetson-inference#hello-ai-world
+Python examples
+•     Directory: /home/test/jetson-inference/python/examples
+•     imagenet-camera.py 
+•     # using GoogleNet, default MIPI CSI camera (1280x720) 
+•     imagenet-camera.py --network=resnet-18 
+•     # using ResNet-18, default MIPI CSI camera (1280x720) 
+•     imagenet-camera.py --camera=/dev/video0 
+•     # using GoogleNet, V4L2 camera /dev/video0 (1280x720) 
+•     imagenet-camera.py --width=640 --height=480 
+•     # using GoogleNet, default MIPI CSI camera (640x480)
+ 
+•     For more https://github.com/dusty-nv/jetson-inference/blob/master/README.md#code-examples
+ 
+imagenet-console 範例
+•     呼叫靜態影像辨識範例來辨識NVIDIA提供的影像
+•     北極熊的圖片polar_bear.jpg  #注意路徑與檔名
+•     辨識完的結果儲存為 polar_bear_inferenced.jpg。
+•     指令格式：./imagenet-console 要辨識的影像路徑及檔名 輸出辨識影像結果的路徑及檔名
+•     $ ./imagenet-console ./images/polar_bear.jpg ./images/polar_bear_inferenced.jpg
+•     第一次執行較慢，因為TensorRT會花上些許的時間來最佳化這個網路，之後再次執行程式就會快很多。
+執行過程1
+執行過程2
+可用DNN
+•    ./imagenet-console 要辨識的影像路徑及檔名 輸入辨識影像結果的路徑及檔名 --network alexnet
+Live Detection Demo
+•     Ref. https://www.digikey.com/en/maker/projects/nvidia-jetson-nano-part-2-image-classification-with-machine-learning/33f1faf4e6d44d3cb6d3340fd42390ea
+•     Download COCO models in previous episode
+•     First, make sure you have a camera plugged into your Jetson Nano. 
+•     This can be a CSI camera (the Raspberry Pi Camera Module V2 supposedly works well) or 
+•     a USB webcam (the Logitech c920 worked for me).
+detectnet-camera 攝影鏡頭做影像辨識
+•     $ cd ~/jetson-inference/build/aarch64/bin/
+•     Set the camera parameter to your connected camera: 
+•     a USB webcam will likely be the device file /dev/video0, or 
+•     if you’re using a CSI camera, it will be just 0 or 1.
+•     $ ./detectnet-camera –network coco-dog –camera /dev/video0
+•     This will start a live feed from your camera. 
+•     It will also attempt to locate any objects in the frame that match the dog model found in the coco-dog network.
+•     $ ./detectnet-camera --network vgg-16 --camera /dev/video0
+detectnet-console 物件偵測 範例
+•     指令格式： ./detectnet-console 要辨識的影像路徑及檔名 輸入辨識影像結果的路徑及檔名
+•     這個範例程式中可以調整的參數為
+•     network、overlay（物件偵測的呈現方式，包含 box, labels, conf, none）、
+•     threshold（設定偵測到物件可顯示的閾值）。
+•     network預設為ssd-mobilenet-v2、
+•     overlay的預設為 box, labels, conf，
+•     threshold預設為0.5。
+•     $ ./detectnet-console 要辨識的影像路徑及檔名 輸入辨識影像結果的路徑及檔名 --network ssd-inception-v2 --overlay=box, labels --threshold 0.4
+ 
+ 
+Example
+detectnet-console Example
+Object detection DNN models
+•    可以使用的Network如下表，可以根據想偵測的物件需求來選擇
+ 
+segnet-console 影像分割 (Segmentation)
+•     下指令呼叫靜態影像分割程式時，必要格式如下：
+•     $ ./segnet-console 要辨識的影像路徑及檔名 輸入辨識影像結果的路徑及檔名
+ 
+•     可以調整的參數為
+•     network（預設為fcn-resnet-18-voc）、
+•     visualize（影像呈現模式，有overlay、mask兩種可以選，預設為overlay）、
+•     filter-mode（過濾模式，有linear、point可以選，預設為linear）、
+•     ignore-class（想要忽略的類別，預設為空）、
+•     alpha（用於設定在overlay狀態下跟原圖混合的程度，範圍為0~255，預設為120）。
+ 
+•    範例：
+•     $ ./segnet-console 要辨識的影像路徑及檔名 輸入辨識影像結果的路徑及檔名 --network fcn-resnet-18-voc-320x320
+DNN models
+呼叫攝影鏡頭做物件偵測程式時
+•    $ ./segnet-camera --network facenet --camera /dev/video0
+ 
+Testing OpenCV
+•    $wget -O penguins.jpg http://pyimg.co/avp96
+•    python3
+•    >>> import cv2
+•    >>> import imutils
+•    >>> image = cv2.imread("penguins.jpg") #check file
+•    >>> image = imutils.resize(image, width=400)
+•    >>> message = "OpenCV Jetson Nano Success!"
+•    >>> font = cv2.FONT_HERSHEY_SIMPLEX
+•    >>> _ = cv2.putText(image, message, (30, 130), font, 0.7, (0, 255, 0), 2)
+•    >>> cv2.imshow("Penguins", image); 
+•    >>> cv2.waitKey(0); 
+•    >>>  cv2.destroyAllWindows()
+ 
+系統備份 Backup 
+•      USB image Tool www.alexpage.de
+•       (WIN32 Disk Imager 無法辨識usb或讀卡機磁碟機)
+•      選擇「Device Mode」。
+•      從左側的選單中，選擇要寫入的磁碟。
+•      按下「backup」，選擇要寫入的影像檔。Restore 為燒錄影像檔成開機
+ 
+ 
+Jupyter Notebook安裝
+瀏覽器連線功能
+•     AI課程常用的JupyterLab，
+•     您只要在筆電的網頁上輸入”https://<JETSON NANO的IP>:8888“，輸入密碼後(密碼：jetbot)，即可遠端連線JETSON NANO。(廠商image or jetbot image)
+安裝
+•    方法一
+•     $ pip3 install jupyter notebook
+•     $執行 jupyter notebook
+ 
+•    方法二
+•     $ sudo apt install nodejs npm 
+•     $ sudo apt install python3-pip 
+•     $ sudo pip3 install jupyter jupyterlab 
+•     $sudo reboot
+ 
+•     $ sudo jupyter labextension install @jupyter-widgets/jupyterlab-manager 
+•     $ jupyter lab --generate-config #生成jupyter lab 配置文件
+•     $ jupyter notebook password
+•     執行 jupyter notebook #jupyter lab
+密碼 jetbot
+Jupyter lab啟動
+•     https://makeronsite.com/jetson-nano-install-jupyter-lab.html
+•     $ jupyter lab
+•     可能會出現兩個問題：
+•      1，流覽器輸入 localhost:8888 可以訪問Jupyter lab，但僅僅本機能訪問，局域網其他主機（終端）均無法訪問；
+•      2，會提示你輸入密碼或者token，token這麼長哪裡記得住，所有我們還是需要設置一下密碼。
+ 
+ 
+設定
+•     $ jupyter lab --generate-config #生成jupyter lab 配會提示設定檔保存在以下路徑：
+•     Writing default config to: /home/test/.jupyter/jupyter_notebook_config.py
+•     其中，路徑上的“test”是我們的用戶名，這個位置的資訊會根據你設置的用戶名有所不同。
+•     使用編輯器，編輯jupyter lab設定檔
+•     $ nano /home/test/.jupyter/jupyter_notebook_config.py
+•     找到以下兩項參數，去掉前面的 #，並修改成如下參數即可
+•     ...
+•     c.NotebookApp.allow_origin = '*' # allow all origins
+•     ...
+•     c.NotebookApp.ip = '0.0.0.0' # listen on all IPs
+•     按ctrl+o 保存，按ctrl+x退出。
+設置密碼
+•     $ jupyter notebook password
+•      這時，會見到
+•      Enter password: ，這時輸入你的密碼按Enter（此時命令列上不會出現任何東西，這是正常現象）
+•      之後，會見到 Verify password: ，再次輸入你的密碼按return，驗證兩次輸入是否一致（此時命令列上不會出現任何東西，這是正常現象）
+•      再之後，會提示密碼已經保存到設定檔中
+•      [NotebookPasswordApp] Wrote hashed password to /home/bbot/.jupyter/jupyter_notebook_config.json
+ 
+•     最後，再次使用jupyter lab 命令。
+•      現在，區域網的主機也可以訪問，輸入Jetson nano 的ip位址加埠8888，
+•      例如：http://ipaddress:8888 ，提示輸入密碼，輸入你設置的密碼即可。
+方法三-1
+•     方法三
+•     影片
+•      https://www.youtube.com/watch?v=zc3SxW056H4
+•     Blog:
+•      https://anwendeng.blogspot.com/2020/07/jetson-nano-jtop-notebook.html
+•     步驟
+•      先把舊版的nodejs, npm清掉，ubuntu庫裡的都太舊：
+•      $ sudo apt remove --purge nodejs npm
+ 
+•      接著看看有無curl，(如果裝libcurl就來玩C程式)沒有就要裝
+•      $ sudo apt install curl
+•      用curl下載新版的
+•      $ curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+•      裝很簡單就 apt，Node.js 14.x & npm都會好
+•      $ sudo apt-get install -y nodejs 
+ 
+方法三-2
+•      網路套件yarn也裝，比只用npm好用
+•      $ curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+•      $ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+•      $ sudo apt-get update && sudo apt-get install yarn
+•      裝好可查版次
+•      $ nodejs -v
+•      $npm -v
+•      用pip3裝jupyter與jupyterlab，如果系統語系是中文可能會顯示中文簡體，處理方式可照影片所示
+•      $ sudo pip3 install --upgrade pip
+•      $ sudo pip3 install jupyter jupyterlab
+•      設密碼超容易
+•      $ jupyter notebook password
+ 
+•      讓他台電腦(非遠端)也可透過網頁瀏覽器作業
+•      $jupyter notebook --ip='*'
+ 
+快速安裝script
+參考blog 檔案jetson_nano_script_jp44.zip
+•    https://jkjung-avt.github.io/jetpack-4.4/
+•     燒影像檔
+•     執行步驟
+•     $ sudo apt update
+•     ###
+•     ### Set proper environment variables
+•     $ mkdir ${HOME}/project
+•     $ cd ${HOME}/project
+•     $ git clone https://github.com/jkjung-avt/jetson_nano.git
+•     $ cd jetson_nano
+•     $ ./install_basics.sh
+•     $ source ${HOME}/.bashrc
+•     後續步驟請參考blog
+ 
+參考blog 檔案
+jetson_nano_script_jp44.zip
+•    https://jkjung-avt.github.io/jetpack-4.3/
+•     燒錄影像檔
+•     執行script 
+•     ### Set proper environment variables
+•     $ mkdir ${HOME}/project
+•     $ cd ${HOME}/project
+•     $ git clone https://github.com/jkjung-avt/jetson_nano.git
+•     $ cd jetson_nano
+•     $ ./install_basics.sh
+•     $ source ${HOME}/.bashrc
+•     後續步驟請參考blog
+ 
+New link
+•    There are directions for turning a regular Jetson Nano image into a Jetbot image here
+•    https://github.com/NVIDIA-AI-IOT/jetbot/wiki/Create-SD-Card-Image-From-Scratch
+ 
+•    Good Blog for Jetpack 4.3
+•     https://www.pyimagesearch.com/2020/03/25/how-to-configure-your-nvidia-jetson-nano-for-computer-vision-and-deep-learning/
+ 
+Install OpenCV  on Jetson Nano
+安裝opencv 4.1.1 (無GPU支援)
+•     Jetpack 4.6 2020/08/30後內建不需安裝預設4.1.1
+•     安裝指令 (會安裝4.4) 目前4.7.0
+•     $ sudo apt-get update
+•     $ sudo apt-get upgrade -y
+•     $ sudo apt-get install build-essential
+•     $ sudo pip3 install opencv-python
+•     $ sudo apt-get install python3-opencv
+•     測試指令
+•     $ python3 -c "import cv2; print(cv2.__version__)"
+Install OpenCV
+•     其實 Jetson Nano 已經預載了 OpenCV，最簡單的方式便是將系統的 OpenCV 直接連結到虛擬環境中。
+•     # 先確定 Jetson Nano OpenCV 的預載位址
+•     $ sudo find / -name “cv2*” #因版本不同可能不同
+ 
+ 
+ 
+ 
+ 
+•     # 進行虛擬環境AI OpenCV 的連結  #若無可以不做
+•     $ cd ~/envs/AI/lib/python3.6/site-packages/
+•     $ ln -s /usr/lib/python3.6/dist-packages/cv2.cpython-36m-aarch64-linux-gnu.so
+•     缺點：OpenCV 似乎沒有用到 CUDA
+重新編譯 OpenCV
+•     第二種方法，其實也就是重新編譯 OpenCV，網路上已經有許多高手將 Jetson Nano 的 OpenCV 編譯安裝都寫成腳本，直接執行就可以進行安裝。
+•     最有名的有 : 
+•     https://qengineering.eu/install-opencv-4.5-on-jetson-nano.html (建議)
+ 
+•     JetsonHacks - OpenCV 4 + CUDA on Jetson Nano
+•     Ref: https://www.jetsonhacks.com/2019/11/22/opencv-4-cuda-on-jetson-nano/
+ 
+•     安裝介紹
+•     增加swap size到8GB以上，越多越好
+•     https://github.com/Qengineering/Install-OpenCV-Jetson-Nano
+•     上列文章的方式都讓 OpenCV 的編譯變得簡單許多。
+ 
+安裝腳本 opencv 
+•    https://qengineering.eu/install-opencv-4.5-on-jetson-nano.html
+ 
+Install OpenCV 
+•    Type the following command.
+ 
+•    $ sudo sh -c "echo '/usr/local/cuda/lib64' >> /etc/ld.so.conf.d/nvidia-tegra.conf"
+•    Create the links and caching to the shared libraries
+ 
+•    $ sudo ldconfig
+•    Install the relevant third party libraries. Play close attention to the line wrapping below. 
+•    Each command begins with “sudo apt-get install”.
+Install OpenCV 
+•    system-level dependencies and other development dependencies
+•     $ sudo apt-get install build-essential cmake git unzip pkg-config
+•     $ sudo apt-get install libjpeg-dev libpng-dev libtiff-dev
+•     $ sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev
+•     $ sudo apt-get install libgtk2.0-dev libcanberra-gtk*
+•     $ sudo apt-get install python3-dev python3-numpy python3-pip
+•     $ sudo apt-get install libxvidcore-dev libx264-dev libgtk-3-dev
+•     $ sudo apt-get install libtbb2 libtbb-dev libdc1394-22-dev
+•     $ sudo apt-get install libv4l-dev v4l-utils
+•     $ sudo apt-get install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+•     $ sudo apt-get install libavresample-dev libvorbis-dev libxine2-dev
+•     $ sudo apt-get install libfaac-dev libmp3lame-dev libtheora-dev
+•     $ sudo apt-get install libopencore-amrnb-dev libopencore-amrwb-dev
+•     $ sudo apt-get install libopenblas-dev libatlas-base-dev libblas-dev
+•     $ sudo apt-get install liblapack-dev libeigen3-dev gfortran
+•     $ sudo apt-get install libhdf5-dev protobuf-compiler
+•     $ sudo apt-get install libprotobuf-dev libgoogle-glog-dev libgflags-dev
+ 
+修正 Swap size (再確認)
+•      安裝opencv前要確認swap file的設定
+•      檢查系統的交換資訊  $sudo swapon –show
+•      $ free –h # 查看 
+•      $ df –h #  檢查硬碟驅動器分割槽上的可用空間  
+•      建立swap file
+•      $ sudo fallocate -l 8G /swapfile $或/var/swapfile
+•      $ ls -lh /swapfile
+ 
+•      啟用交換檔案
+•      $ sudo chmod 600 /swapfile
+•      $ ls -lh /swapfile
+•      $ sudo mkswap /swapfile
+•      $ sudo swapon /swapfile
+•      $ sudo swapon –show
+•      $ sudo cp /etc/fstab /etc/fstab.bak #舊設定備份
+•      $ echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+ 
+Download OpenCV
+•    $ cd ~ 
+•    $ wget -O opencv.zip https://github.com/opencv/opencv/archive/4.5.1.zip 
+•    $ wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/4.5.1.zip 
+•    $ unzip opencv.zip 
+•    $ unzip opencv_contrib.zip
+Install OpenCV 4.5.1
+•    In this section, we will install the OpenCV library with CUDA support on our Jetson Nano.
+•    We will be compiling from source, so first let’s download the OpenCV source code from GitHub:
+•     $ mv opencv-4.5.1 opencv
+•     $ mv opencv_contrib-4.5.1 opencv_contrib
+•     rm opencv.zip 
+•     rm opencv_contrib.zip
+•     $ cd opencv
+•     $ mkdir build
+•     $ cd build
+ 
+ 
+OpenCV install
+•      cmake -D CMAKE_BUILD_TYPE=RELEASE \ 
+•      -D CMAKE_INSTALL_PREFIX=/usr \ 
+•      -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \ 
+•      -D EIGEN_INCLUDE_PATH=/usr/include/eigen3 \ 
+•      -D WITH_OPENCL=OFF \ -D WITH_CUDA=ON \ -D CUDA_ARCH_BIN=5.3 \ 
+•      -D CUDA_ARCH_PTX="" \ -D WITH_CUDNN=ON \ -D WITH_CUBLAS=ON \ 
+•      -D ENABLE_FAST_MATH=ON \ -D CUDA_FAST_MATH=ON \ -D OPENCV_DNN_CUDA=ON \ 
+•      -D ENABLE_NEON=ON \ -D WITH_QT=OFF \ -D WITH_OPENMP=ON \ 
+•      -D WITH_OPENGL=ON \ -D BUILD_TIFF=ON \ 
+•      -D WITH_FFMPEG=ON \ -D WITH_GSTREAMER=ON \ 
+•      -D WITH_TBB=ON \ -D BUILD_TBB=ON \ -D BUILD_TESTS=OFF \ 
+•      -D WITH_EIGEN=ON \ -D WITH_V4L=ON \ -D WITH_LIBV4L=ON \ 
+•      -D OPENCV_ENABLE_NONFREE=ON \ -D INSTALL_C_EXAMPLES=OFF \ 
+•      -D INSTALL_PYTHON_EXAMPLES=OFF \ -D BUILD_NEW_PYTHON_SUPPORT=ON \ 
+•      -D BUILD_opencv_python3=TRUE \ -D OPENCV_GENERATE_PKGCONFIG=ON \ 
+•      -D BUILD_EXAMPLES=OFF ..
+Note
+•     The key here being: -D OPENCV_GENERATE_PKGCONFIG=YES
+•     Then continue build and install as normal. 
+•     I've checked and it does seem that OpenCV does install the .pc file now, so no need to manually copy it over. 
+•     The package will be installed named as "opencv4", so use pkg-config --cflags opencv4.
+Continuous
+•     $ cd ..
+•     $ rm -rf build
+•     $ mkdir build
+•     $ cd build
+•     # run CMake command again
+•     $ make –j4
+•     $ sudo make install
+•     $ sudo ldconfig
+•     $ make clean
+•     $ sudo apt-get update
+ 
+ 
+ 
+•    Check where your opencv4.pc is:
+•    First move all the way up, twice from your home with
+$ cd ..
+$ cd ..
+•    Then:
+•     $ sudo find -name opencv4.pc
+•    You should find some pkgfolders with this:
+•     $ sudo find -name pkgconfig
+ 
+驗證是否成功
+不同網站說明
+•    https://makerpro.cc/2019/06/how-to-make-jetson-nano-perform-cuda-in-opencv4-1-0-smoothly/
+ 
+Opencv 4.4 正確cmake參數 討論區
+•      cmake \ 
+•      -D WITH_CUDA=ON \ 
+•      -D WITH_CUDNN=ON \ 
+•      -D WITH_V4L=ON \ 
+•      -D OPENCV_DNN_CUDA=ON \ 
+•      -D CUDNN_VERSION='8.0' \ 
+•      -D CUDNN_INCLUDE_DIR='/usr/include/' \ 
+•      -D ENABLE_FAST_MATH=1 \ 
+•      -D CUDA_FAST_MATH=1 \ 
+•      -D CUDA_ARCH_BIN="5.3" \ 
+•      -D CUDA_ARCH_PTX="" \ 
+•      -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \ 
+•      -D WITH_GSTREAMER=ON \ 
+•      -D WITH_LIBV4L=ON \ 
+•      -D BUILD_opencv_python2=ON \
+•       -D BUILD_opencv_python3=ON \ 
+•      -D BUILD_TESTS=OFF \ 
+•      -D BUILD_PERF_TESTS=OFF \ 
+•      -D BUILD_EXAMPLES=OFF \ 
+•      -D CMAKE_BUILD_TYPE=RELEASE \ 
+•      -D CMAKE_INSTALL_PREFIX=/usr/local  ..
+JetPack4.4 OPENCV4.4.0
+•      日本網站 JetPack4.4 OPENCV4.4.0
+•      https://www.miki-ie.com/column/nvidia-jetson-nano-opencv-cudnn-dnn/
+ 
+•      Github
+•      https://github.com/mdegans/nano_build_opencv
+•      $ sudo sh ./build_opencv.sh
+•      or
+•      $ sudo sh ./build_opencv.sh 4.4.0
+•      需要10小時
+ 
+•      安裝成功後於home directory /home/test建立連結
+•      $ sudo find / -name cv2* #確認.so檔的位置
+•      $ ln -s /usr/local/lib/python3.6/site-packages/cv2/python3.6/cv2.cpython-36m-aarch64-linux-gnu.so cv2.so
+ 
+•      JetPack 4.4 NOTE: the minimum version that will build correctly on JetPack 4.4 GA is 4.4.0. Prior versions of JetPack may need the CUDNN version adjusted (the -D CUDNN_VERSION='8.0' line can simply be removed).
+Install OpenCV 4.4.0 and Caffe
+on Ubuntu 20.04 for Python 3
+•    https://qengineering.eu/install-caffe-on-ubuntu-20.04-with-opencv-4.4.html
